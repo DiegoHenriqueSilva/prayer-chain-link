@@ -118,7 +118,7 @@ const Pray = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex gap-3 flex-wrap">
                   <Button
                     onClick={generatePrayer}
                     disabled={isGenerating}
@@ -133,6 +133,15 @@ const Pray = () => {
                     disabled={isLoading}
                   >
                     Próxima Causa
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setPrayerRequest(null);
+                      setSuggestedPrayer("");
+                    }}
+                    variant="outline"
+                  >
+                    Voltar
                   </Button>
                 </div>
               </Card>
