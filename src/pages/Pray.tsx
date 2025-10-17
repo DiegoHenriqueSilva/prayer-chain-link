@@ -138,14 +138,62 @@ const Pray = () => {
               </Card>
 
               {suggestedPrayer && (
-                <Card className="p-8 soft-shadow border-primary/20 animate-fade-in">
-                  <h3 className="text-xl font-semibold mb-4 text-primary">
-                    Sugestão de Oração
-                  </h3>
-                  <p className="text-foreground/90 leading-relaxed italic whitespace-pre-wrap">
-                    {suggestedPrayer}
-                  </p>
-                </Card>
+                <>
+                  <Card className="p-8 soft-shadow border-primary/20 animate-fade-in">
+                    <h3 className="text-xl font-semibold mb-4 text-primary">
+                      Sugestão de Oração
+                    </h3>
+                    <p className="text-foreground/90 leading-relaxed italic whitespace-pre-wrap">
+                      {suggestedPrayer}
+                    </p>
+                  </Card>
+
+                  <Card className="p-8 soft-shadow border-primary/20 animate-fade-in">
+                    <h3 className="text-xl font-semibold mb-4 text-primary">
+                      Envie Energia e Solidariedade
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-6">
+                      Reaja com um emoticon para mostrar seu apoio
+                    </p>
+                    <div className="flex flex-wrap gap-4 justify-center">
+                      <button 
+                        className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-accent/10 transition-colors group"
+                        onClick={() => toast.success("Reação enviada!")}
+                      >
+                        <span className="text-4xl group-hover:scale-110 transition-transform">❤️</span>
+                        <span className="text-xs text-center text-muted-foreground">Compaixão e Amor</span>
+                      </button>
+                      <button 
+                        className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-accent/10 transition-colors group"
+                        onClick={() => toast.success("Reação enviada!")}
+                      >
+                        <span className="text-4xl group-hover:scale-110 transition-transform">🙏</span>
+                        <span className="text-xs text-center text-muted-foreground">Graça de Deus</span>
+                      </button>
+                      <button 
+                        className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-accent/10 transition-colors group"
+                        onClick={() => toast.success("Reação enviada!")}
+                      >
+                        <span className="text-4xl group-hover:scale-110 transition-transform">⏳</span>
+                        <span className="text-xs text-center text-muted-foreground">Paciência</span>
+                      </button>
+                      <button 
+                        className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-accent/10 transition-colors group"
+                        onClick={() => toast.success("Reação enviada!")}
+                      >
+                        <span className="text-4xl group-hover:scale-110 transition-transform">💪</span>
+                        <span className="text-xs text-center text-muted-foreground">Força e Coragem</span>
+                      </button>
+                      <button 
+                        className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-accent/10 transition-colors group"
+                        onClick={() => toast.success("Reação enviada!")}
+                      >
+                        <span className="text-4xl group-hover:scale-110 transition-transform">🥺</span>
+                        <span className="text-xs text-center text-muted-foreground">Empatia</span>
+                      </button>
+                    </div>
+                  </Card>
+                </>
               )}
             </div>
           )}

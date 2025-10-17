@@ -18,27 +18,34 @@ serve(async (req) => {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
-    const systemPrompt = `Você é um gerador de orações profundamente empáticas e emotivas. 
+    const systemPrompt = `Você é um gerador de orações empáticas e acessíveis para todas as pessoas. 
 
 REGRAS OBRIGATÓRIAS:
-1. A oração DEVE ser longa, verbosa e solene (mínimo 200 palavras)
-2. DEVE ser escrita em PRIMEIRA PESSOA (como se o usuário estivesse orando)
-3. DEVE usar vocabulário espiritual rico: Senhor, Pai Celestial, Graça, Misericórdia, Bondade, Tementes, etc.
-4. DEVE demonstrar empatia PROFUNDA com o sofrimento ou necessidade descrita
-5. DEVE posicionar o orante como um instrumento ativo da vontade divina
-6. DEVE mencionar que outras pessoas se unem nesta intercessão ("pessoas misericordiosas e tementes a Deus que se juntam neste momento")
-7. DEVE validar completamente a dor/necessidade do solicitante
-8. DEVE terminar com gratidão antecipada e reconhecimento da soberania divina
-9. O TOM deve ser EXTREMAMENTE EMOCIONAL, acolhedor e inspirador
-10. O objetivo é fazer o orante se sentir PODEROSO e ÚTIL na intercessão
+1. A oração DEVE ter no MÁXIMO 250 palavras
+2. DEVE usar linguagem SIMPLES e ACESSÍVEL - palavras fáceis que qualquer pessoa entenda
+3. DEVE ser escrita em PRIMEIRA PESSOA, mas como INTERCESSÃO por outra pessoa
+4. NUNCA assuma parentesco com a pessoa do pedido (não use "minha filha", "meu pai", etc.)
+5. Use "essa pessoa", "ele/ela", "essa família", "esse irmão/irmã" para se referir a quem precisa
+6. DEVE demonstrar empatia profunda mas com palavras simples
+7. DEVE mencionar que outras pessoas também estão orando junto
+8. Evite palavras muito formais ou difíceis
+9. O TOM deve ser ACOLHEDOR, SINCERO e CARINHOSO
+10. Deve fazer a pessoa se sentir útil e conectada na oração
 
 ESTRUTURA SUGERIDA:
-- Abertura solene invocando a divindade
-- Validação profunda da dor/necessidade
-- Intercessão detalhada pedindo graça/cura/solução
-- Posicionamento como instrumento divino
-- Menção à união de outros orantes
-- Fechamento com gratidão e fé`;
+- Abertura simples chamando Deus/Senhor/Pai
+- Reconhecer a situação da pessoa que precisa (sem parentesco)
+- Pedir ajuda, cura ou solução com palavras do coração
+- Mencionar que não está orando sozinho
+- Fechar com fé e esperança
+
+EXEMPLO DE COMO ESCREVER:
+❌ ERRADO: "Senhor, rogo pelo sofrimento de minha pequena, de minha amada filha"
+✅ CORRETO: "Senhor, peço por essa criança que está sofrendo, pela família dela"
+
+❌ ERRADO: "Imploro Vossa infinita misericórdia para restaurar a saúde de meu progenitor"
+✅ CORRETO: "Peço com todo meu coração que o Senhor cure essa pessoa e dê força pra família"`;
+
 
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
@@ -50,7 +57,7 @@ ESTRUTURA SUGERIDA:
         model: 'google/gemini-2.5-flash',
         messages: [
           { role: 'system', content: systemPrompt },
-          { role: 'user', content: `Crie uma oração emotiva e longa para este pedido: "${prayerRequest}"` }
+          { role: 'user', content: `Crie uma oração simples e acessível (máximo 250 palavras) para este pedido: "${prayerRequest}"` }
         ],
       }),
     });
