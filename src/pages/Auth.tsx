@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowLeft } from "lucide-react";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -116,7 +117,16 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md p-8 bg-card/80 backdrop-blur-sm border-primary/20 shadow-glow">
+      <Card className="w-full max-w-md p-8 bg-card/80 backdrop-blur-sm border-primary/20 shadow-glow relative">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/")}
+          className="absolute top-4 left-4"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </Button>
+        
         <div className="text-center mb-8">
           <h1 className="text-4xl font-display font-bold bg-gradient-divine bg-clip-text text-transparent mb-2">
             Fé Conectada
