@@ -67,19 +67,20 @@ const Submit = () => {
 
   return (
     <div className="min-h-screen gradient-peace relative overflow-hidden">
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => navigate("/")}
+        className="absolute top-4 left-4 z-20"
+      >
+        <ArrowLeft className="w-5 h-5" />
+      </Button>
+      
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2"></div>
       
       <div className="container mx-auto px-4 py-12 relative z-10">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate("/")}
-          className="mb-4"
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </Button>
         
         <div className="max-w-2xl mx-auto text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent gradient-divine bg-gradient-to-r from-primary to-accent">
