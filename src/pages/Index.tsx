@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Heart, Send, Sparkles, LogOut, User } from "lucide-react";
+import { Heart, Send, Sparkles, LogOut, User, BookOpen } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
@@ -106,6 +106,28 @@ const Index = () => {
             </div>
           </Card>
         </div>
+
+        {/* My Prayers Card - only for logged in users */}
+        {user && (
+          <div className="max-w-4xl mx-auto mt-8">
+            <Card className="p-6 soft-shadow hover:scale-[1.02] smooth-transition group">
+              <div className="flex items-center gap-6">
+                <div className="w-16 h-16 gradient-sacred rounded-full flex items-center justify-center celestial-glow group-hover:scale-110 smooth-transition flex-shrink-0">
+                  <BookOpen className="w-8 h-8 text-secondary-foreground" />
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-2xl font-bold">Minhas Preces</h2>
+                  <p className="text-muted-foreground">Veja quantas pessoas oraram por você e as reações recebidas</p>
+                </div>
+                <Link to="/my-prayers">
+                  <Button className="gradient-divine text-primary-foreground hover:opacity-90">
+                    Ver Histórico
+                  </Button>
+                </Link>
+              </div>
+            </Card>
+          </div>
+        )}
 
         {/* Info Section */}
         <div className="max-w-3xl mx-auto mt-16 text-center">

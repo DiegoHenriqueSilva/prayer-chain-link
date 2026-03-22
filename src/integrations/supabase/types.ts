@@ -14,6 +14,38 @@ export type Database = {
   }
   public: {
     Tables: {
+      prayer_reactions: {
+        Row: {
+          created_at: string
+          id: string
+          prayer_request_id: string
+          reaction_type: string
+          reactor_user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          prayer_request_id: string
+          reaction_type: string
+          reactor_user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          prayer_request_id?: string
+          reaction_type?: string
+          reactor_user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prayer_reactions_prayer_request_id_fkey"
+            columns: ["prayer_request_id"]
+            isOneToOne: false
+            referencedRelation: "prayer_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       prayer_requests: {
         Row: {
           content: string
@@ -23,6 +55,7 @@ export type Database = {
           prayer_count: number
           title: string | null
           updated_at: string
+          user_id: string | null
         }
         Insert: {
           content: string
@@ -32,6 +65,7 @@ export type Database = {
           prayer_count?: number
           title?: string | null
           updated_at?: string
+          user_id?: string | null
         }
         Update: {
           content?: string
@@ -41,6 +75,7 @@ export type Database = {
           prayer_count?: number
           title?: string | null
           updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }

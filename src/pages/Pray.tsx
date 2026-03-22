@@ -186,41 +186,35 @@ const Pray = () => {
                       Reaja com um emoticon para mostrar seu apoio
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center">
-                      <button 
-                        className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-accent/10 transition-colors group"
-                        onClick={() => toast.success("Reação enviada!")}
-                      >
-                        <span className="text-4xl group-hover:scale-110 transition-transform">❤️</span>
-                        <span className="text-xs text-center text-muted-foreground">Compaixão e Amor</span>
-                      </button>
-                      <button 
-                        className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-accent/10 transition-colors group"
-                        onClick={() => toast.success("Reação enviada!")}
-                      >
-                        <span className="text-4xl group-hover:scale-110 transition-transform">🙏</span>
-                        <span className="text-xs text-center text-muted-foreground">Graça de Deus</span>
-                      </button>
-                      <button 
-                        className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-accent/10 transition-colors group"
-                        onClick={() => toast.success("Reação enviada!")}
-                      >
-                        <span className="text-4xl group-hover:scale-110 transition-transform">⏳</span>
-                        <span className="text-xs text-center text-muted-foreground">Paciência</span>
-                      </button>
-                      <button 
-                        className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-accent/10 transition-colors group"
-                        onClick={() => toast.success("Reação enviada!")}
-                      >
-                        <span className="text-4xl group-hover:scale-110 transition-transform">💪</span>
-                        <span className="text-xs text-center text-muted-foreground">Força e Coragem</span>
-                      </button>
-                      <button 
-                        className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-accent/10 transition-colors group"
-                        onClick={() => toast.success("Reação enviada!")}
-                      >
-                        <span className="text-4xl group-hover:scale-110 transition-transform">🥺</span>
-                        <span className="text-xs text-center text-muted-foreground">Empatia</span>
-                      </button>
+                      {[
+                        { type: "love", emoji: "❤️", label: "Compaixão e Amor" },
+                        { type: "pray", emoji: "🙏", label: "Graça de Deus" },
+                        { type: "patience", emoji: "⏳", label: "Paciência" },
+                        { type: "strength", emoji: "💪", label: "Força e Coragem" },
+                        { type: "empathy", emoji: "🥺", label: "Empatia" },
+                      ].map((reaction) => (
+                        <button
+                          key={reaction.type}
+                          className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-accent/10 transition-colors group"
+                          onClick={async () => {
+                            try {
+                              const { data: { session } } = await supabase.auth.getSession();
+                              if (!session) return;
+                              await supabase.from("prayer_reactions").insert({
+                                prayer_request_id: prayerRequest.id,
+                                reactor_user_id: session.user.id,
+                                reaction_type: reaction.type,
+                              });
+                              toast.success("Reação enviada!");
+                            } catch {
+                              toast.error("Erro ao enviar reação");
+                            }
+                          }}
+                        >
+                          <span className="text-4xl group-hover:scale-110 transition-transform">{reaction.emoji}</span>
+                          <span className="text-xs text-center text-muted-foreground">{reaction.label}</span>
+                        </button>
+                      ))}
                     </div>
                   </Card>
                 </>
