@@ -37,6 +37,7 @@ const Submit = () => {
 
     setIsSubmitting(true);
     try {
+      const { data: { session } } = await supabase.auth.getSession();
       const { error } = await supabase
         .from('prayer_requests')
         .insert([
@@ -44,7 +45,8 @@ const Submit = () => {
             title: formData.title.trim() || null,
             content: formData.content.trim(),
             location: formData.location.trim() || null,
-            prayer_count: 0
+            prayer_count: 0,
+            user_id: session?.user?.id
           }
         ]);
 
