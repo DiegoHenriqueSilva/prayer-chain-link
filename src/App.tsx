@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Pray from "./pages/Pray";
 import Submit from "./pages/Submit";
+import MyPrayers from "./pages/MyPrayers";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
