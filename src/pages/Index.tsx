@@ -6,6 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { useXp } from "@/hooks/use-xp";
+import { XpBadge } from "@/components/XpBadge";
 
 const Index = () => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
