@@ -12,6 +12,7 @@ import { XpBadge } from "@/components/XpBadge";
 const Index = () => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const navigate = useNavigate();
+  const { totalXp, loading: xpLoading } = useXp();
 
   useEffect(() => {
     // Check current session
