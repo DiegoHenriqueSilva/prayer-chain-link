@@ -55,7 +55,8 @@ const Submit = () => {
 
       if (error) throw error;
 
-      toast.success("Seu pedido de oração foi enviado com sucesso!");
+      await addXp("submit");
+      toast.success(`Pedido enviado! +${XP_REWARDS.submit} XP`);
       setFormData({ title: "", content: "", location: "" });
       
       // Navigate to home after 2 seconds

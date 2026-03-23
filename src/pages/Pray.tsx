@@ -210,7 +210,8 @@ const Pray = () => {
                                 reactor_user_id: session.user.id,
                                 reaction_type: reaction.type,
                               });
-                              toast.success("Reação enviada!");
+                              await addXp("react");
+                              toast.success(`Reação enviada! +${XP_REWARDS.react} XP`);
                             } catch {
                               toast.error("Erro ao enviar reação");
                             }

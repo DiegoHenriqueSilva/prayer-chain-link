@@ -61,6 +61,15 @@ const Index = () => {
             </Button>
           )}
         </div>
+        {/* XP Badge for logged in users */}
+        {user && !xpLoading && (
+          <div className="max-w-md mx-auto mb-6">
+            <Card className="p-4 soft-shadow">
+              <XpBadge totalXp={totalXp} />
+            </Card>
+          </div>
+        )}
+
         {/* Hero Section */}
         <div className="text-center mb-16 animate-fade-in">
           <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent gradient-divine bg-gradient-to-r from-primary via-accent to-secondary">
