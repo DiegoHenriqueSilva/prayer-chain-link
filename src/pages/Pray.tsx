@@ -47,6 +47,8 @@ const Pray = () => {
           .eq('id', randomRequest.id);
         
         setSuggestedPrayer("");
+        await addXp("pray");
+        toast.success(`+${XP_REWARDS.pray} XP por orar!`);
       } else {
         toast.info("Não há causas disponíveis no momento");
       }
