@@ -14,6 +14,7 @@ import { XP_REWARDS } from "@/lib/xp";
 const Submit = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { addXp } = useXp();
 
   useEffect(() => {
     // Check if user is authenticated
