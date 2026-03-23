@@ -15,18 +15,12 @@ const Index = () => {
   const { totalXp, loading: xpLoading } = useXp();
 
   useEffect(() => {
-    // Check current session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
     });
-
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
     });
-
     return () => subscription.unsubscribe();
   }, []);
 
@@ -36,14 +30,14 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-peace relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
-      
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Subtle decorative gold circles */}
+      <div className="absolute top-[-8rem] right-[-6rem] w-[28rem] h-[28rem] rounded-full bg-primary/5 blur-3xl" />
+      <div className="absolute bottom-[-6rem] left-[-6rem] w-[24rem] h-[24rem] rounded-full bg-accent/5 blur-3xl" />
+
       <div className="container mx-auto px-4 py-4 relative z-10">
-        {/* Header with Auth */}
-        <div className="flex justify-end mb-8">
+        {/* Header */}
+        <div className="flex justify-end mb-6">
           {user ? (
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -61,38 +55,43 @@ const Index = () => {
             </Button>
           )}
         </div>
-        {/* XP Badge for logged in users */}
+
+        {/* Hero */}
+        <div className="text-center mb-10 animate-fade-in">
+          <p className="text-sm uppercase tracking-[0.3em] text-primary font-medium mb-3">
+            ✦ Unidos pela Fé ✦
+          </p>
+          <h1 className="text-6xl md:text-7xl font-bold mb-4 text-foreground">
+            Fé Conectada
+          </h1>
+          <div className="divider-gold max-w-xs mx-auto mb-4" />
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            Conectando corações através da oração. Seja um instrumento da graça divina ou compartilhe sua necessidade com a comunidade.
+          </p>
+        </div>
+
+        {/* XP Badge */}
         {user && !xpLoading && (
-          <div className="max-w-md mx-auto mb-6">
-            <Card className="p-4 soft-shadow">
+          <div className="max-w-sm mx-auto mb-10">
+            <Card className="p-4 soft-shadow border-primary/15">
               <XpBadge totalXp={totalXp} />
             </Card>
           </div>
         )}
 
-        {/* Hero Section */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent gradient-divine bg-gradient-to-r from-primary via-accent to-secondary">
-            Fé Conectada
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Conectando corações através da oração. Seja um instrumento da graça divina ou compartilhe sua necessidade com a comunidade.
-          </p>
-        </div>
-
         {/* Action Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <Card className="p-8 soft-shadow hover:scale-105 smooth-transition group">
-            <div className="text-center space-y-6">
-              <div className="w-20 h-20 mx-auto gradient-divine rounded-full flex items-center justify-center celestial-glow group-hover:scale-110 smooth-transition">
-                <Heart className="w-10 h-10 text-white" />
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <Card className="p-8 soft-shadow hover:shadow-lg smooth-transition group border-primary/10">
+            <div className="text-center space-y-5">
+              <div className="w-16 h-16 mx-auto gradient-divine rounded-full flex items-center justify-center group-hover:scale-105 smooth-transition">
+                <Heart className="w-8 h-8 text-primary-foreground" />
               </div>
-              <h2 className="text-3xl font-bold">Orar por uma Causa</h2>
-              <p className="text-muted-foreground leading-relaxed">
+              <h2 className="text-3xl font-bold text-foreground">Orar por uma Causa</h2>
+              <p className="text-muted-foreground leading-relaxed text-sm">
                 Receba um pedido de oração aleatório e seja um instrumento de intercessão e graça
               </p>
               <Link to="/pray">
-                <Button size="lg" className="gradient-divine text-white hover:opacity-90 w-full">
+                <Button size="lg" className="gradient-divine text-primary-foreground hover:opacity-90 w-full">
                   <Sparkles className="w-4 h-4 mr-2" />
                   Começar a Orar
                 </Button>
@@ -100,17 +99,17 @@ const Index = () => {
             </div>
           </Card>
 
-          <Card className="p-8 soft-shadow hover:scale-105 smooth-transition group">
-            <div className="text-center space-y-6">
-              <div className="w-20 h-20 mx-auto gradient-sacred rounded-full flex items-center justify-center celestial-glow group-hover:scale-110 smooth-transition">
-                <Send className="w-10 h-10 text-foreground" />
+          <Card className="p-8 soft-shadow hover:shadow-lg smooth-transition group border-primary/10">
+            <div className="text-center space-y-5">
+              <div className="w-16 h-16 mx-auto bg-secondary rounded-full flex items-center justify-center group-hover:scale-105 smooth-transition border border-primary/20">
+                <Send className="w-8 h-8 text-foreground" />
               </div>
-              <h2 className="text-3xl font-bold">Enviar Pedido</h2>
-              <p className="text-muted-foreground leading-relaxed">
+              <h2 className="text-3xl font-bold text-foreground">Enviar Pedido</h2>
+              <p className="text-muted-foreground leading-relaxed text-sm">
                 Compartilhe sua necessidade de oração com a comunidade e receba apoio espiritual
               </p>
               <Link to="/submit">
-                <Button size="lg" className="gradient-sacred hover:opacity-90 w-full">
+                <Button size="lg" variant="outline" className="w-full border-primary/30 hover:bg-primary/5">
                   <Send className="w-4 h-4 mr-2" />
                   Enviar Pedido
                 </Button>
@@ -119,20 +118,20 @@ const Index = () => {
           </Card>
         </div>
 
-        {/* My Prayers Card - only for logged in users */}
+        {/* My Prayers */}
         {user && (
           <div className="max-w-4xl mx-auto mt-8">
-            <Card className="p-6 soft-shadow hover:scale-[1.02] smooth-transition group">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-16 gradient-sacred rounded-full flex items-center justify-center celestial-glow group-hover:scale-110 smooth-transition flex-shrink-0">
-                  <BookOpen className="w-8 h-8 text-secondary-foreground" />
+            <Card className="p-5 soft-shadow hover:shadow-lg smooth-transition group border-primary/10">
+              <div className="flex items-center gap-5">
+                <div className="w-12 h-12 gradient-sacred rounded-full flex items-center justify-center group-hover:scale-105 smooth-transition flex-shrink-0">
+                  <BookOpen className="w-6 h-6 text-accent-foreground" />
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-2xl font-bold">Minhas Preces</h2>
-                  <p className="text-muted-foreground">Veja quantas pessoas oraram por você e as reações recebidas</p>
+                  <h2 className="text-xl font-bold text-foreground">Minhas Preces</h2>
+                  <p className="text-sm text-muted-foreground">Veja quantas pessoas oraram por você</p>
                 </div>
                 <Link to="/my-prayers">
-                  <Button className="gradient-divine text-primary-foreground hover:opacity-90">
+                  <Button className="gradient-divine text-primary-foreground hover:opacity-90" size="sm">
                     Ver Histórico
                   </Button>
                 </Link>
@@ -141,25 +140,25 @@ const Index = () => {
           </div>
         )}
 
-        {/* Info Section */}
-        <div className="max-w-3xl mx-auto mt-16 text-center">
-          <Card className="p-8 soft-shadow bg-card/50 backdrop-blur">
-            <h3 className="text-2xl font-semibold mb-4">Como Funciona</h3>
-            <div className="grid md:grid-cols-2 gap-6 text-left">
-              <div>
-                <h4 className="font-semibold text-primary mb-2">📿 Para Orantes</h4>
-                <p className="text-sm text-muted-foreground">
-                  Receba causas aleatórias e ore com sugestões de oração geradas por IA que capturam a essência emocional de cada pedido
-                </p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-secondary mb-2">✨ Para Solicitantes</h4>
-                <p className="text-sm text-muted-foreground">
-                  Envie seus pedidos e saiba quantas pessoas oraram por você. Sua causa será compartilhada anonimamente com a comunidade
-                </p>
-              </div>
+        {/* How it works */}
+        <div className="max-w-3xl mx-auto mt-14 text-center">
+          <div className="divider-gold mb-8" />
+          <h3 className="text-2xl font-semibold mb-6 text-foreground">Como Funciona</h3>
+          <div className="grid md:grid-cols-2 gap-8 text-left">
+            <div>
+              <h4 className="font-semibold text-primary mb-2 text-base">📿 Para Orantes</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Receba causas aleatórias e ore com sugestões de oração geradas por IA que capturam a essência emocional de cada pedido
+              </p>
             </div>
-          </Card>
+            <div>
+              <h4 className="font-semibold text-primary mb-2 text-base">✨ Para Solicitantes</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Envie seus pedidos e saiba quantas pessoas oraram por você. Sua causa será compartilhada anonimamente
+              </p>
+            </div>
+          </div>
+          <div className="divider-gold mt-8" />
         </div>
       </div>
     </div>
