@@ -5,6 +5,8 @@ import { Sparkles, Heart, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { useXp } from "@/hooks/use-xp";
+import { XP_REWARDS } from "@/lib/xp";
 
 const Pray = () => {
   const [prayerRequest, setPrayerRequest] = useState<any>(null);
