@@ -14,6 +14,7 @@ const Pray = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const navigate = useNavigate();
+  const { addXp } = useXp();
 
   useEffect(() => {
     // Check if user is authenticated
