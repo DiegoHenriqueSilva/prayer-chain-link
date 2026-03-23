@@ -8,10 +8,13 @@ import { Send, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { useXp } from "@/hooks/use-xp";
+import { XP_REWARDS } from "@/lib/xp";
 
 const Submit = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { addXp } = useXp();
 
   useEffect(() => {
     // Check if user is authenticated
@@ -52,7 +55,8 @@ const Submit = () => {
 
       if (error) throw error;
 
-      toast.success("Seu pedido de oração foi enviado com sucesso!");
+      await addXp("submit");
+      toast.success(`Pedido enviado! +${XP_REWARDS.submit} XP`);
       setFormData({ title: "", content: "", location: "" });
       
       // Navigate to home after 2 seconds

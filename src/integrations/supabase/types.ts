@@ -79,12 +79,48 @@ export type Database = {
         }
         Relationships: []
       }
+      user_xp: {
+        Row: {
+          created_at: string
+          id: string
+          prayers_given: number
+          prayers_submitted: number
+          reactions_sent: number
+          total_xp: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          prayers_given?: number
+          prayers_submitted?: number
+          reactions_sent?: number
+          total_xp?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          prayers_given?: number
+          prayers_submitted?: number
+          reactions_sent?: number
+          total_xp?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      add_xp: {
+        Args: { p_action: string; p_user_id: string; p_xp_amount: number }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never

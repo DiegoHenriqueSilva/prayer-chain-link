@@ -6,10 +6,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { useXp } from "@/hooks/use-xp";
+import { XpBadge } from "@/components/XpBadge";
 
 const Index = () => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const navigate = useNavigate();
+  const { totalXp, loading: xpLoading } = useXp();
 
   useEffect(() => {
     // Check current session
@@ -58,6 +61,15 @@ const Index = () => {
             </Button>
           )}
         </div>
+        {/* XP Badge for logged in users */}
+        {user && !xpLoading && (
+          <div className="max-w-md mx-auto mb-6">
+            <Card className="p-4 soft-shadow">
+              <XpBadge totalXp={totalXp} />
+            </Card>
+          </div>
+        )}
+
         {/* Hero Section */}
         <div className="text-center mb-16 animate-fade-in">
           <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent gradient-divine bg-gradient-to-r from-primary via-accent to-secondary">

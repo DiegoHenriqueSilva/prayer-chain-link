@@ -5,6 +5,8 @@ import { Sparkles, Heart, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { useXp } from "@/hooks/use-xp";
+import { XP_REWARDS } from "@/lib/xp";
 
 const Pray = () => {
   const [prayerRequest, setPrayerRequest] = useState<any>(null);
@@ -12,6 +14,7 @@ const Pray = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const navigate = useNavigate();
+  const { addXp } = useXp();
 
   useEffect(() => {
     // Check if user is authenticated
@@ -44,6 +47,8 @@ const Pray = () => {
           .eq('id', randomRequest.id);
         
         setSuggestedPrayer("");
+        await addXp("pray");
+        toast.success(`+${XP_REWARDS.pray} XP por orar!`);
       } else {
         toast.info("Não há causas disponíveis no momento");
       }
@@ -205,7 +210,8 @@ const Pray = () => {
                                 reactor_user_id: session.user.id,
                                 reaction_type: reaction.type,
                               });
-                              toast.success("Reação enviada!");
+                              await addXp("react");
+                              toast.success(`Reação enviada! +${XP_REWARDS.react} XP`);
                             } catch {
                               toast.error("Erro ao enviar reação");
                             }
