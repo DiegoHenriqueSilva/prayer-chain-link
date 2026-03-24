@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Pray from "./pages/Pray";
 import Submit from "./pages/Submit";
 import MyPrayers from "./pages/MyPrayers";
+import MyIntercessions from "./pages/MyIntercessions";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/pray" element={<Pray />} />
           <Route path="/submit" element={<Submit />} />
           <Route path="/my-prayers" element={<MyPrayers />} />
+          <Route path="/my-intercessions" element={<MyIntercessions />} />
           <Route path="/auth" element={<Auth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

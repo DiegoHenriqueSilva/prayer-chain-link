@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Heart, Send, Sparkles, LogOut, User, BookOpen } from "lucide-react";
+import { Heart, Send, Sparkles, LogOut, User, BookOpen, HandHeart } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { useXp } from "@/hooks/use-xp";
 import { XpBadge } from "@/components/XpBadge";
 import PageTransition from "@/components/PageTransition";
+import { NotificationBell } from "@/components/NotificationBell";
 import { motion } from "framer-motion";
 
 const cardHover = {
@@ -55,7 +56,8 @@ const Index = () => {
           {/* Header */}
           <motion.div className="flex justify-end mb-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
             {user ? (
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                <NotificationBell />
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <User className="w-4 h-4" />
                   {user.email}
@@ -144,7 +146,7 @@ const Index = () => {
 
           {/* My Prayers */}
           {user && (
-            <motion.div className="max-w-4xl mx-auto mt-8" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+            <motion.div className="max-w-4xl mx-auto mt-8 space-y-4" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
               <motion.div whileHover={{ scale: 1.01, y: -2 }} transition={{ duration: 0.25 }}>
                 <Card className="p-5 soft-shadow border-primary/10">
                   <div className="flex items-center gap-5">
@@ -158,6 +160,25 @@ const Index = () => {
                     <Link to="/my-prayers">
                       <Button className="gradient-divine text-primary-foreground hover:opacity-90" size="sm">
                         Ver Histórico
+                      </Button>
+                    </Link>
+                  </div>
+                </Card>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.01, y: -2 }} transition={{ duration: 0.25 }}>
+                <Card className="p-5 soft-shadow border-primary/10">
+                  <div className="flex items-center gap-5">
+                    <div className="w-12 h-12 gradient-divine rounded-full flex items-center justify-center flex-shrink-0">
+                      <HandHeart className="w-6 h-6 text-primary-foreground" />
+                    </div>
+                    <div className="flex-1">
+                      <h2 className="text-xl font-bold text-foreground">Minhas Intercessões</h2>
+                      <p className="text-sm text-muted-foreground">Causas que você orou e retornos recebidos</p>
+                    </div>
+                    <Link to="/my-intercessions">
+                      <Button className="gradient-divine text-primary-foreground hover:opacity-90" size="sm">
+                        Ver Lista
                       </Button>
                     </Link>
                   </div>
