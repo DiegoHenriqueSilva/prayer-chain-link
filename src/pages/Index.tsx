@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Heart, Send, Sparkles, LogOut, User, BookOpen } from "lucide-react";
+import { Heart, Send, Sparkles, LogOut, User, BookOpen, HandHeart } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
