@@ -56,7 +56,8 @@ const Index = () => {
           {/* Header */}
           <motion.div className="flex justify-end mb-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
             {user ? (
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                <NotificationBell />
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <User className="w-4 h-4" />
                   {user.email}
