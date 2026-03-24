@@ -146,7 +146,7 @@ const Index = () => {
 
           {/* My Prayers */}
           {user && (
-            <motion.div className="max-w-4xl mx-auto mt-8" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+            <motion.div className="max-w-4xl mx-auto mt-8 space-y-4" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
               <motion.div whileHover={{ scale: 1.01, y: -2 }} transition={{ duration: 0.25 }}>
                 <Card className="p-5 soft-shadow border-primary/10">
                   <div className="flex items-center gap-5">
@@ -160,6 +160,25 @@ const Index = () => {
                     <Link to="/my-prayers">
                       <Button className="gradient-divine text-primary-foreground hover:opacity-90" size="sm">
                         Ver Histórico
+                      </Button>
+                    </Link>
+                  </div>
+                </Card>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.01, y: -2 }} transition={{ duration: 0.25 }}>
+                <Card className="p-5 soft-shadow border-primary/10">
+                  <div className="flex items-center gap-5">
+                    <div className="w-12 h-12 gradient-divine rounded-full flex items-center justify-center flex-shrink-0">
+                      <HandHeart className="w-6 h-6 text-primary-foreground" />
+                    </div>
+                    <div className="flex-1">
+                      <h2 className="text-xl font-bold text-foreground">Minhas Intercessões</h2>
+                      <p className="text-sm text-muted-foreground">Causas que você orou e retornos recebidos</p>
+                    </div>
+                    <Link to="/my-intercessions">
+                      <Button className="gradient-divine text-primary-foreground hover:opacity-90" size="sm">
+                        Ver Lista
                       </Button>
                     </Link>
                   </div>
