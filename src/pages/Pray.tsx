@@ -39,8 +39,19 @@ const Pray = () => {
         const randomRequest = data[Math.floor(Math.random() * data.length)];
         setPrayerRequest(randomRequest);
         await supabase.from('prayer_requests').update({ prayer_count: randomRequest.prayer_count + 1 }).eq('id', randomRequest.id);
+        
+        // Record intercession
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          await supabase.from('prayer_intercessions').upsert({
+            prayer_request_id: randomRequest.id,
+            user_id: session.user.id,
+          }, { onConflict: 'prayer_request_id,user_id' });
+        }
+        
         setSuggestedPrayer("");
         await addXp("pray");
+        toast.success(`+${XP_REWARDS.pray} XP por orar!`);
         toast.success(`+${XP_REWARDS.pray} XP por orar!`);
       } else {
         toast.info("Não há causas disponíveis no momento");
