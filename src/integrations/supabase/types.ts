@@ -14,6 +14,70 @@ export type Database = {
   }
   public: {
     Tables: {
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean
+          message: string
+          prayer_request_id: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message: string
+          prayer_request_id?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          prayer_request_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_prayer_request_id_fkey"
+            columns: ["prayer_request_id"]
+            isOneToOne: false
+            referencedRelation: "prayer_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prayer_intercessions: {
+        Row: {
+          created_at: string
+          id: string
+          prayer_request_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          prayer_request_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          prayer_request_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prayer_intercessions_prayer_request_id_fkey"
+            columns: ["prayer_request_id"]
+            isOneToOne: false
+            referencedRelation: "prayer_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       prayer_reactions: {
         Row: {
           created_at: string
@@ -50,6 +114,7 @@ export type Database = {
         Row: {
           content: string
           created_at: string
+          feedback: string | null
           id: string
           location: string | null
           prayer_count: number
@@ -60,6 +125,7 @@ export type Database = {
         Insert: {
           content: string
           created_at?: string
+          feedback?: string | null
           id?: string
           location?: string | null
           prayer_count?: number
@@ -70,6 +136,7 @@ export type Database = {
         Update: {
           content?: string
           created_at?: string
+          feedback?: string | null
           id?: string
           location?: string | null
           prayer_count?: number
