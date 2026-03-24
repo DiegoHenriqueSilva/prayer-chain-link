@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Pray from "./pages/Pray";
 import Submit from "./pages/Submit";
 import MyPrayers from "./pages/MyPrayers";
+import MyIntercessions from "./pages/MyIntercessions";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
