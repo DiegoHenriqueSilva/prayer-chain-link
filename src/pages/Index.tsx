@@ -9,6 +9,7 @@ import type { User as SupabaseUser } from "@supabase/supabase-js";
 import { useXp } from "@/hooks/use-xp";
 import { XpBadge } from "@/components/XpBadge";
 import PageTransition from "@/components/PageTransition";
+import { NotificationBell } from "@/components/NotificationBell";
 import { motion } from "framer-motion";
 
 const cardHover = {
