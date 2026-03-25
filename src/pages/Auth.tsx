@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { Button } from "@/components/ui/button";
@@ -18,17 +18,40 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { toast } = useToast();
+  const referrerId = searchParams.get("ref");
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) navigate("/");
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "SIGNED_IN" && session) {
+        // Process referral if applicable
+        const storedRef = localStorage.getItem("fe_referrer");
+        if (storedRef && storedRef !== session.user.id) {
+          try {
+            await supabase.functions.invoke("process-referral", {
+              body: { referrer_user_id: storedRef, referred_user_id: session.user.id },
+            });
+          } catch (e) {
+            console.error("Referral processing error:", e);
+          }
+          localStorage.removeItem("fe_referrer");
+        }
+        navigate("/");
+      }
     });
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) navigate("/");
     });
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Store referrer ID
+  useEffect(() => {
+    if (referrerId) {
+      localStorage.setItem("fe_referrer", referrerId);
+    }
+  }, [referrerId]);
 
   const handleGoogleSignIn = async () => {
     setGoogleLoading(true);
@@ -98,6 +121,9 @@ const Auth = () => {
               <h1 className="text-4xl font-bold text-foreground mb-1">Fé Conectada</h1>
               <div className="divider-gold max-w-[6rem] mx-auto my-3" />
               <p className="text-sm text-muted-foreground">Unidos pela oração</p>
+              {referrerId && (
+                <p className="text-xs text-primary mt-2">🎁 Você foi convidado! Crie sua conta e comece a orar.</p>
+              )}
             </div>
 
             <Button variant="outline" className="w-full mb-5 border-primary/20" onClick={handleGoogleSignIn} disabled={googleLoading}>
@@ -115,7 +141,7 @@ const Auth = () => {
               <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-3 text-xs text-muted-foreground">ou</span>
             </div>
 
-            <Tabs defaultValue="login" className="w-full">
+            <Tabs defaultValue={referrerId ? "signup" : "login"} className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="login">Entrar</TabsTrigger>
                 <TabsTrigger value="signup">Criar Conta</TabsTrigger>
