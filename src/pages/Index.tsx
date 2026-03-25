@@ -184,6 +184,25 @@ const Index = () => {
                   </div>
                 </Card>
               </motion.div>
+
+              <motion.div whileHover={{ scale: 1.01, y: -2 }} transition={{ duration: 0.25 }}>
+                <Card className="p-5 soft-shadow border-primary/10">
+                  <div className="flex items-center gap-5">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary/80 to-accent rounded-full flex items-center justify-center flex-shrink-0">
+                      <Sun className="w-6 h-6 text-primary-foreground" />
+                    </div>
+                    <div className="flex-1">
+                      <h2 className="text-xl font-bold text-foreground">Evangelho do Dia</h2>
+                      <p className="text-sm text-muted-foreground">Passagem bíblica diária para compartilhar</p>
+                    </div>
+                    <Link to="/daily-gospel">
+                      <Button className="gradient-divine text-primary-foreground hover:opacity-90" size="sm">
+                        Ler Hoje
+                      </Button>
+                    </Link>
+                  </div>
+                </Card>
+              </motion.div>
             </motion.div>
           )}
 
