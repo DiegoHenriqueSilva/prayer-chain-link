@@ -118,7 +118,7 @@ const Auth = () => {
 
             <div className="text-center mb-6 pt-4">
               <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">✦</p>
-              <h1 className="text-4xl font-bold text-foreground mb-1">Fé Conectada</h1>
+              <h1 className="text-4xl font-bold text-foreground mb-1">Améns</h1>
               <div className="divider-gold max-w-[6rem] mx-auto my-3" />
               <p className="text-sm text-muted-foreground">Unidos pela oração</p>
               {referrerId && (
