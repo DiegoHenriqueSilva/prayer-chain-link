@@ -80,7 +80,7 @@ const Index = () => {
               ✦ Unidos pela Fé ✦
             </motion.p>
             <motion.h1 variants={fadeUp} className="text-6xl md:text-7xl font-bold mb-4 text-foreground">
-              Fé Conectada
+              Améns
             </motion.h1>
             <motion.div variants={fadeUp} className="divider-gold max-w-xs mx-auto mb-4" />
             <motion.p variants={fadeUp} className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
