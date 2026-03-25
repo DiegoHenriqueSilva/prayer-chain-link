@@ -9,6 +9,7 @@ import Submit from "./pages/Submit";
 import MyPrayers from "./pages/MyPrayers";
 import MyIntercessions from "./pages/MyIntercessions";
 import Auth from "./pages/Auth";
+import DailyGospel from "./pages/DailyGospel";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/my-prayers" element={<MyPrayers />} />
           <Route path="/my-intercessions" element={<MyIntercessions />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/daily-gospel" element={<DailyGospel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
